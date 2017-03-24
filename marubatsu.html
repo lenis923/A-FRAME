@@ -1,0 +1,113 @@
+<html>
+　<head>
+     <title>◯☓</title>
+　　<script src="js/aframe-master.js"></script>
+　</head>
+  <body>
+    <script>
+      AFRAME.registerComponent('scale-on-mouseenter', {
+        schema: {
+          to: {default: '2.5 2.5 2.5'}
+        },
+        init: function () {
+          var data = this.data;
+          this.el.addEventListener('mouseenter', function () {
+            this.setAttribute('scale', data.to);
+          });
+        }
+      });
+      AFRAME.registerComponent('scale-on-mouseleave', {
+        schema: {
+          to: {default: '2.5 2.5 2.5'}
+        },
+        init: function () {
+          var data = this.data;
+          this.el.addEventListener('mouseleave', function () {
+            this.setAttribute('scale', data.to);
+          });
+        }
+      });
+    </script>     
+     
+    <script type="text/javascript">
+//        function click_square(square_id) {
+//            var image = "#circle";
+//            document.querySelector("#" + square_id).setAttribute("src", image);
+//        }
+
+        AFRAME.registerComponent('plane-on-click', {
+            init: function () {
+                this.el.addEventListener("click", function (evt) {
+                    // click_square(this.id);
+                    this.setAttribute('src', '#circle');
+                });
+            }
+        });
+    </script>
+      
+　　<a-scene>
+      <!-- 利用する画像の定義 使い回しはこっちかな？ -->
+      <a-assets>
+          <img src="http://i.imgur.com/7YnjGfI.png" id="square" crossorigin="anonymous">
+          <img src="http://i.imgur.com/vxesSQm.png" id="circle" crossorigin="anonymous">
+          <img src="http://i.imgur.com/EdymqIg.png" id="cross" crossorigin="anonymous">
+            <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+      </a-assets>
+      
+      
+      
+      <a-sky color="#ECECEC"></a-sky>
+      
+      
+      <a-entity id="square"><!-- a-entity無くても良いかも -->
+          <a-plane id="square0" plane-on-click src="#square" position="-1 0 -1" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square1" plane-on-click src="#square" position="-1 0 0" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square2" plane-on-click src="#square" position="-1 0 1" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square3" plane-on-click src="#square" position="0 0 -1" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square4" plane-on-click src="#square" position="0 0 0" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square5" plane-on-click src="#square" position="0 0 1" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square6" plane-on-click src="#square" position="1 0 -1" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square7" plane-on-click src="#square" position="1 0 0" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+          <a-plane id="square8" plane-on-click src="#square" position="1 0 1" rotation="-90 0 0" width="1" height="1" color="#EEEEEE"></a-plane>
+      </a-entity>
+      
+      
+      
+      
+      <!-- a-plane src="#square" rotation="-90 0 0" width="30" height="30" repeat="10 10"></a-plane -->
+      <!-- a-box src="#circle" position="0 2 -5" rotation="0 45 45" scale="2 2 2">
+          <a-animation attribute="position" to="0 2.2 -5" direction="alternate" dur="2000"
+          repeat="indefinite"></a-animation>
+      </a-box -->
+
+      <a-text value="Hello, A-Frame!" color="#BBB" position="-0.9 0.2 -3" scale="1.5 1.5 1.5"></a-text>
+      
+      <a-box src="#boxTexture"
+             position="0 2 -5"
+             rotation="0 45 45"
+             scale="1 1 1"
+             scale-on-mouseenter="to: 1.5 1.5 1.5"
+             scale-on-mouseleave="to: 1.0 1.0 1.0">
+          <a-animation attribute="position" to="0 3.5 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+      </a-box>
+      
+      
+        <a-light type="point" intensity="2" position="2 4 4"></a-light>
+        <a-camera position="0 1.6 -4" rotation="0 180 0" id="player1">
+            <a-cursor></a-cursor>
+            <a-box color="#998877"></a-box>
+            <a-text value="Player1" color="#BBB" position="0 1 0" scale="3 3 0" rotation="0 180 0"></a-text>
+        </a-camera>
+      
+        <a-camera position="0 1.6 4" id="player2">
+            <!-- a-cursor></a-cursor -->
+            <a-cursor fuse=true fuse-timeout=1000></a-cursor>
+            <a-cylinder color="#114499"></a-cylinder>
+            <a-text value="Player2" color="#BBB" position="0 1 0" scale="3 3 0" rotation="0 180 0"></a-text>
+        </a-camera>
+      
+      
+　　</a-scene>
+
+  </body>
+</html>
